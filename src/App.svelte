@@ -11,11 +11,9 @@
 
 <main>
   <h1>Simple Gas Flow Calculator</h1>
-  <h2>Current date:</h2>
-  <p>{date ? date : 'Loading date...'}</p>
+  <h2>by: fanioz</h2>  
   <br>
   <table>
-        <th colspan="3">Simple Gas Flow Calculator</th>
         <tr>
             <td>Pipe Diameter:</td>
             <td><input type="radio" id="line3" name="lined" checked="true"><label for="line3">Line 3"</label></td>
@@ -43,4 +41,5 @@
             <td><p id="Result">Result :</p></td>
         </tr>
   </table>
+  <p>{date ? date : 'Loading date...'}</p>
 </main>
