@@ -23,6 +23,12 @@ $: {
         window.alert("ID orifice lebih besar dari ID line. ID Pipa di ubah 6 inch");
         lined = 6;
     }
+    
+    if ((typeof orifice_mm === "undefined") || orifice_mm < 1) {
+        window.alert("ID orifice tidak boleh lebih kecil dari 1");
+        orifice_mm = 1;
+        setInch();
+    }
 }
 
 $: abs_press = press + 1.01325;
