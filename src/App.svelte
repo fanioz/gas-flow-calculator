@@ -1,45 +1,103 @@
 <script>
   import { onMount } from "svelte";
-  export let date;
+  import MyInputBox from "./inputbox.svelte";
 
+  export let date;
   onMount(async () => {
     const res = await fetch("/api/date");
     const newDate = await res.text();
     date = newDate;
   });
+
+//
+const LN = Math.log;
+
+let lined = 3, man_diam_orifice = 0.125;
+let press = 0, man_hw = 1, temper = 0;
+let man_SG = 0.7;
+let orifice_mm, id_line_mm;
+$: orifice_mm = man_diam_orifice * 25.4;
+$: id_line_mm = lined * 25.4; //default 3"
+$: {
+    if (lined == 3 && orifice_mm > 70) {
+        window.alert("ID orifice lebih besar dari ID line. ID Pipa di ubah 6 inch");
+        lined = 6;
+    }
+}
+
+$: abs_press = press + 1.01325;
+$: abs_temp = temper + 273.15;
+$: result = Calculate(lined, man_diam_orifice, man_hw, press, temper, man_SG);
+
+
+const zO = () => {
+    let zo15 = (abs_press-1)*14.50377/(697.2-43*man_SG);
+    let zo16 = ((abs_temp-273.15)*1.8+492)/(315.1*man_SG+170.4);
+    let zo17 = 0.3379*LN(LN(zo16))+1.091;
+    let zo18 = 21.46*zo17-11.9*Math.pow(zo17,2)-5.9;
+    let zo19 = (1.1+0.26*zo16+(1.04-1.42*zo16)*zo15/zo18)*Math.exp(zo15/zo18)/zo16;
+    return 1+(zo17-1)*Math.pow((Math.sin(zo15/zo18*Math.PI/2)),zo19);
+};
+
+const Calculate = () => {
+    let H22 = 1;
+    let H23 = orifice_mm/id_line_mm;
+    let H26 = 25.4/id_line_mm;
+    let H25 = 0.5959+0.0312*Math.pow(H23,2.1)-0.184*Math.pow(H23,8)+0.0029*Math.pow(H23,2.5)*Math.pow((1/H22),0.75);
+    let H27 = H25+0.09*H26*0.039-0.0337*H26*Math.pow(H23,3);
+    let H28 = H25+0.09*H26*Math.pow(H23,4)*Math.pow((1-Math.pow(H23,4)),-1)-0.0337*H26*Math.pow(H23,3);
+    let H29 = (H26<=0.433)? H28:H27;
+    let H295 = Math.pow(H23,4);
+    let H30 = (1-(0.41+0.35*H295)*man_hw*0.0019154/abs_press)/Math.pow((1-H295),0.5)*H29;
+    let H31 = H30*33.957*Math.pow(orifice_mm,2)*Math.pow((man_hw*abs_press/abs_temp/man_SG/zO()),0.5)*0.000024;
+    let H33 = H31*man_SG/id_line_mm*51.03435;
+    let H34 = H23;
+    let H36 = 0.5959+0.0312*Math.pow(H34,2.1)-0.184*Math.pow(H34,8)+0.0029*Math.pow(H34,2.5)*Math.pow((1/H33),0.75);
+    let H37 = H26;
+    let H38 = H36+0.09*H37*0.039-0.0337*H37*Math.pow(H34,3);
+    let H39 = H36+0.09*H37*Math.pow(H34,4)*Math.pow((1-Math.pow(H34,4)),-1)-0.0337*H37*Math.pow(H34,3);
+    let H40 = (H37<=0.433) ? H39 : H38;
+    let H41 =(1-(0.41+0.35*Math.pow(H34,4))*man_hw*0.0019154/abs_press)/Math.pow((1-Math.pow(H34,4)),0.5)*H40;
+    let result = H41*33.957*Math.pow(orifice_mm,2)*Math.pow((man_hw*abs_press/abs_temp/man_SG/zO()),0.5)*0.024;
+    return result;
+}
+
 </script>
 
 <main>
   <h1>Simple Gas Flow Calculator</h1>
   <h2>by: fanioz</h2>  
-  <br>
   <table>
-        <tr>
-            <td>Pipe Diameter:</td>
-            <td><input type="radio" id="line3" name="lined" checked="true"><label for="line3">Line 3"</label></td>
-            <td><input type="radio" id="line6" name="lined"><label for="line6">Line 6"</label></td>
+        <tr><td>Pipe Diameter:</td>
+          <td><label><input type=radio bind:group={lined} value={3}>3 inch</label></td>
+          <td><label><input type=radio bind:group={lined} value={6}>6 inch</label></td>
         </tr>
         <tr>
-            <td><label for="dOrificeIn">Orifice D:</label></td>
-            <td><input type="text" id="dOrificeIn" name="dOrificeIn" oninput="ConvertMM()">inch</td>
-            <td><input type="text" id="dOrificeMM" name="dOrificeMM" value="50.8" >mm</td>
+          <td colspan="3"><label>Slider Orifice:
+            <input type=range bind:value={man_diam_orifice} min=0.125 max=5 step=0.125>
+          </label></td>
         </tr>
         <tr>
-            <td><label for="upPress">Pressure:</label></td>
-            <td colspan="2"><input type="text" id="upPress" name="press" placeholder="Bar" value="50"></td>
+            <td colspan="2"><MyInputBox caption = "Orifice:" bind:variabel = {man_diam_orifice} endunit = "inch" min=0.125 max=5 step=0.125/></td>
+            <td><MyInputBox caption = ":" bind:variabel = {orifice_mm} endunit = "mm" min=1 max=127/></td>
         </tr>
-        <tr>
-            <td><label for="hw">HW:</label></td>
-            <td  colspan="2"><input type="text" id="hw" name = "hw" placeholder="inchH20" value="50"></td>
+        <tr><td colspan="3">
+          <MyInputBox caption = "Upstream Pressure:" bind:variabel = {press} endunit = "Bar" min=0 max=1000/></td>
         </tr>
+        <tr><td  colspan="3">
+          <MyInputBox caption = "Diff. Pressure (Hw):" bind:variabel = {man_hw} endunit = "inch H2O" min=0 max=1000/>
+        </td></tr>
+        <tr><td  colspan="3">
+          <MyInputBox caption = "Temperature:" bind:variabel = {temper} endunit = "deg C" min=0 max=1000/>
+        </td></tr>
+        <tr><td colspan="3">
+          <MyInputBox caption = "SG Gas:" bind:variabel = {man_SG} min=0.1 max=0.86 step=0.1/>
+        </td></tr>
         <tr>
-            <td><label for="temp">Temperature:</label></td>
-            <td  colspan="2"><input type="text" id="temp" name="temp" placeholder="deg C" value="50"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><center><button onclick="Calculate()">Hitung</button></center></td>
-            <td><p id="Result">Result :</p></td>
+        <td colspan="2">Using pipe ID {id_line_mm.toFixed(2)} mm and orifice {orifice_mm.toFixed(2)} mm</td>
+          <td>Result : {result.toFixed(2)} MSCFD</td>
         </tr>
   </table>
   <p>{date ? date : 'Loading date...'}</p>
 </main>
+
