@@ -62,6 +62,8 @@ const Calculate = () => {
     return result;
 }
 
+const setInch = () => man_diam_orifice = orifice_mm / 25.4; 
+
 </script>
 
 <main>
@@ -79,7 +81,7 @@ const Calculate = () => {
         </tr>
         <tr>
             <td colspan="2"><MyInputBox caption = "Orifice:" bind:variabel = {man_diam_orifice} endunit = "inch" min=0.125 max=5 step=0.125/></td>
-            <td><MyInputBox caption = ":" bind:variabel = {orifice_mm} endunit = "mm" min=1 max=127/></td>
+            <td><MyInputBox caption = ":" bind:variabel = {orifice_mm} endunit = "mm" min=1 max=127 on:input={e => setInch(e.target.value)} /></td>
         </tr>
         <tr><td colspan="3">
           <MyInputBox caption = "Upstream Pressure:" bind:variabel = {press} endunit = "Bar" min=0 max=1000/></td>
