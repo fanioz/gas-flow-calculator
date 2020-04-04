@@ -161,6 +161,7 @@
           bind:value={man_diam_orifice}
           min="0.125"
           max="5"
+          style="width:100px;"
           step="0.125" />
         inch
       </div>
@@ -170,6 +171,7 @@
           bind:value={orifice_mm}
           min="1"
           max="127"
+          style="width:100px;"
           on:input={e => setInch(e.target.value)} />
         mm
       </div>
