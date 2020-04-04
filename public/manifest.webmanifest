@@ -1,0 +1,22 @@
+{
+  "short_name": "Gas Calc",
+  "name": "Gas Flow Calculator",
+  "description": "a Simple Natural Gas Flow Calculator",
+  "icons": [
+    {
+      "src": "/formula.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/formula512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#3367D6",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#3367D6"
+}
