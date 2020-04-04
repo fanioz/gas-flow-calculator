@@ -111,12 +111,12 @@
   const setInch = () => (man_diam_orifice = orifice_mm / 25.4)
 </script>
 
-<main class="box">
+<main class="box has-background-grey-lighter">
   <div class="box has-background-grey-light">
     <div class="title">Simple Gas Flow Calculator</div>
     <div class="subtitle">by: fanioz</div>
   </div>
-  <div class="box has-background-grey-lighter has-text-justified">
+  <div class="box has-background-grey-light has-text-justified">
     <div class="field has-addons">
       <div class="column is-one-third">
         <label class="label">Pipe Diameter:</label>
