@@ -204,9 +204,9 @@
       Result : {result.toFixed(2)} MSCFD
     </div>
     <div class="is-size-7">
-      Using pipe ID {lined} inch, orifice {orifice_mm} mm, Pressure at {press}
-      BarG, Temperature at {temper} deg C, and HW at {man_hw} inch H2O and SG
-      gas set at {man_SG}.
+      Using pipe ID {lined} inch, orifice {orifice_mm.toFixed(2)} mm, Pressure
+      at {press} BarG, Temperature at {temper} deg C, and HW at {man_hw} inch
+      H2O and SG gas set at {man_SG}.
     </div>
   </div>
   <p>{date ? date : 'Loading date...'}</p>
