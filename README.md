@@ -1,27 +1,21 @@
-# Svelte Example
+# Simple Gas Flow Calculator
 
-This directory is a brief example of a [Svelte](https://svelte.dev/) app with [Serverless Functions](https://zeit.co/docs/v2/serverless-functions/introduction) that can be deployed with ZEIT Now and zero configuration.
+This is rough calculator to calculate flow rate of gases through known pipe and orifice.
 
-## Deploy Your Own
+### How To Run Locally
+Run from terminal :
+```shell
+$ cd gas-flow-calculator
+$ npm run dev
+```
+or 
+```shell
+$ npm run start
+```
 
-Deploy your own Svelte project, along with Serverless Functions, with ZEIT Now.
+### Deploy Your Own
+
+Deploy your own Svelte project, along with Serverless Functions, with template from ZEIT Now.
 
 [![Deploy with ZEIT Now](https://zeit.co/button)](https://zeit.co/import/project?template=https://github.com/zeit/now/tree/master/examples/svelte)
 
-_Live Example: https://svelte.now-examples.now.sh_
-
-### How We Created This Example
-
-To get started with Svelte, along with [Serverless Functions](https://zeit.co/docs/v2/serverless-functions/introduction), deployed with ZEIT Now, you can use [degit](https://github.com/Rich-Harris/degit) to initialize the project:
-
-```shell
-$ npx degit sveltejs/template my-svelte-project
-```
-
-### Deploying From Your Terminal
-
-You can deploy your new Svelte project, along with [Serverless Functions](https://zeit.co/docs/v2/serverless-functions/introduction), with a single command from your terminal using [Now CLI](https://zeit.co/download):
-
-```shell
-$ now
-```
