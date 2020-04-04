@@ -217,6 +217,10 @@
     <button id="butInstall" type="button">Install</button>
     <button class="button is-danger is-rounded">Install</button>
   </div>
+  <!-- import the webpage's javascript file -->
+  <script src="/script.js" defer>
+
+  </script>
   <div>
     Icons made by
     <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">
