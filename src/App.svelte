@@ -214,8 +214,7 @@
   <p>{date ? date : 'Loading date...'}</p>
   <!-- Install button, hidden by default -->
   <div id="installContainer" class="is-hidden">
-    <button id="butInstall" type="button">Install</button>
-    <button class="button is-danger is-rounded">Install</button>
+    <button id="butInstall" class="button is-danger is-rounded">Install</button>
   </div>
   <!-- import the webpage's javascript file -->
   <script src="/script.js" defer>
