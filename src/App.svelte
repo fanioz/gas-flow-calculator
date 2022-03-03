@@ -231,6 +231,21 @@
         <button id="butInstall" class="button is-danger is-rounded">Install</button>
       </div>
   </div>    
+  <div class="box has-background-yellow-light">
+    <div class="is-size-7">
+      Orifice size: BL15/16 = 22.22mm BL17/18/19/20/21 = 20.77mm
+      BG15S	49.2	19.05
+BG16S	49.2	25.4
+BG17S	49.2	20.77
+BG18S	49.2	20.77
+BG21S	49.2	20.77
+BG19S	49.2	20.77
+BG21S	49.2	20.77
+BG22S	49.2	20.77
+
+    </div>
+    
+  </div>
   <!-- import the webpage's javascript file -->
   <script src="/script.js" defer>
 
