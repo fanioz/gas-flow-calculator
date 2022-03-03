@@ -22,6 +22,12 @@
   $: orifice_mm = man_diam_orifice * 25.4
   $: id_line_mm = lined * 25.4 //default 3"
   $: {
+    if (lined == 2 && orifice_mm > 50) {
+      window.alert(
+        'ID orifice lebih besar dari ID line. ID Pipa di ubah 3 inch',
+      )
+      lined = 3
+    }
     if (lined == 3 && orifice_mm > 70) {
       window.alert(
         'ID orifice lebih besar dari ID line. ID Pipa di ubah 6 inch',
@@ -110,7 +116,6 @@
 
   const setInch = () => (man_diam_orifice = orifice_mm / 25.4)
 </script>
-
 <main class="box has-background-grey-lighter">
   <div class="box has-background-grey-light">
     <div class="title">Simple Gas Flow Calculator</div>
@@ -120,6 +125,14 @@
     <div class="field has-addons">
       <div class="column is-one-third">
         <label class="label">Pipe Diameter:</label>
+      </div>
+      <div class="column">
+        <div class="control">
+          <label class="radio">
+            <input type="radio" bind:group={lined} value={2} />
+            2 inch
+          </label>
+        </div>
       </div>
       <div class="column">
         <div class="control">
@@ -212,9 +225,24 @@
     </div>
   </div>
   <p>{date ? date : 'Loading date...'}</p>
-  <!-- Install button, hidden by default -->
-  <div id="installContainer" class="is-hidden">
-    <button id="butInstall" class="button is-danger is-rounded">Install</button>
+  <div class="box">
+    <!-- Install button, hidden by default -->
+      <div id="installContainer" class="is-hidden is-center">
+        <button id="butInstall" class="button is-danger is-rounded">Install</button>
+      </div>
+  </div>    
+  <div class="box has-background-yellow-light">
+    
+      Orifice size: 
+    <div class="is-size-7">
+
+      BL15/BL16 = 22.22mm BL17/BL18/BL19/BL20/BL21 = 20.77mm
+    </div>
+    <div class="is-size-7">
+      BG15 = 19.05mm BG16 =	25.4mm
+      BG17/BG18/BG20/BG19/BG21/BG22=20.77mm
+    </div>
+    
   </div>
   <!-- import the webpage's javascript file -->
   <script src="/script.js" defer>
