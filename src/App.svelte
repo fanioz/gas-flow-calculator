@@ -234,17 +234,13 @@
   <div class="box has-background-yellow-light">
     
       Orifice size: 
-      <div class="is-size-7">
+    <div class="is-size-7">
 
-      BL15/16 = 22.22mm BL17/18/19/20/21 = 20.77mm
+      BL15/BL16 = 22.22mm BL17/BL18/BL19/BL20/BL21 = 20.77mm
+    </div>
+    <div class="is-size-7">
       BG15 = 19.05mm BG16 =	25.4mm
-BG17/
-BG18/
-BG20/
-BG19/
-BG21/
-BG22=20.77mm
-
+      BG17/BG18/BG20/BG19/BG21/BG22=20.77mm
     </div>
     
   </div>
