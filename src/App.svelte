@@ -116,12 +116,6 @@
 
   const setInch = () => (man_diam_orifice = orifice_mm / 25.4)
 </script>
-<nav>
-<div class="box">
-<!-- Install button, hidden by default -->
-  <div id="installContainer" class="is-hidden is-center">
-    <button id="butInstall" class="button is-danger is-rounded">Install</button>
-  </div></div></nav>
 <main class="box has-background-grey-lighter">
   <div class="box has-background-grey-light">
     <div class="title">Simple Gas Flow Calculator</div>
@@ -231,6 +225,12 @@
     </div>
   </div>
   <p>{date ? date : 'Loading date...'}</p>
+  <div class="box">
+    <!-- Install button, hidden by default -->
+      <div id="installContainer" class="is-hidden is-center">
+        <button id="butInstall" class="button is-danger is-rounded">Install</button>
+      </div>
+  </div>    
   <!-- import the webpage's javascript file -->
   <script src="/script.js" defer>
 
